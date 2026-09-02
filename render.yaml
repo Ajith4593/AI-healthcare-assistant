@@ -4,7 +4,7 @@ services:
     env: python
     branch: main
     plan: standard-1x
-    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    buildCommand: pip install --upgrade pip && pip install -r requirements.render.txt
     startCommand: gunicorn -k uvicorn.workers.UvicornWorker server1:app --bind 0.0.0.0:$PORT --workers 2 --timeout 120
     autoDeploy: true
 

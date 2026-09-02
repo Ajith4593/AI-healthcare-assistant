@@ -1,0 +1,15 @@
+# Minimal dependencies for running the web API on Render
+fastapi>=0.110.0
+uvicorn[standard]>=0.28.0
+gunicorn>=20.1.0
+python-dotenv>=1.0.0
+pydantic>=2.7.0
+python-multipart>=0.0.9
+requests>=2.31.0
+cachetools>=5.3.0
+sqlalchemy>=2.0.25
+aiosqlite>=0.20.0
+Pillow>=10.2.0
+opencv-python-headless>=4.9.0.80
+# Optional: lightweight Pinecone client for vector DB calls (will fallback if no key)
+pinecone>=5.0.0
