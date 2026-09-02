@@ -1,3 +1,31 @@
+services:
+  - type: web
+    name: ai-healthcare-backend
+    env: python
+    branch: main
+    plan: standard-1x
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: gunicorn -k uvicorn.workers.UvicornWorker server1:app --bind 0.0.0.0:$PORT --workers 2 --timeout 120
+    autoDeploy: true
+
+  - type: static
+    name: ai-healthcare-frontend
+    branch: main
+    buildCommand: npm ci && npm run build
+    publishPath: dist
+    autoDeploy: true
+
+databases:
+  - name: ai-healthcare-db
+    engine: postgresql
+    plan: starter
+    region: oregon
+
+# Notes:
+# - Do NOT store secrets in this file. Add API keys and secrets via the Render dashboard
+#   or the Render CLI as environment variables for the `ai-healthcare-backend` service.
+# - The backend expects `DATABASE_URL` to be set to the Postgres connection string.
+# - Render does not provide GPUs; use hosted LLM APIs for model inference in production.
 # ==============================================================================
 # Render Blueprint Configuration (render.yaml)
 # AI-Powered Healthcare Communication Assistant for Rural Communities
